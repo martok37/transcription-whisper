@@ -1,16 +1,29 @@
 import whisper
+import os
 
-# Załaduj model (np. "small", "medium" lub "large")
-model = whisper.load_model("tiny")
+# Settings
+language = 'fr'
 
-# Opcjonalne: podaj ścieżkę do pliku audio
-audio_path = r"data/les_parisiennes.wav"
 
-# Transkrypcja z użyciem określonego języka
-result = model.transcribe(audio_path, language="fr")
+def main():
+    # transcribe every file in input directory
+    for filename in os.listdir('input'):
+        # allowed formats are mp3 and wav
+        if filename.split('.')[-1] not in ['mp3', 'wav']:
+            continue
 
-# Wyświetl wynik transkrypcji
-print(result['text'])
-# Zapisz wynik transkrypcji
-with open('data/transcryption.txt', 'w') as f:
-    f.write(result['text'])
+        # audio/transcription title
+        title = os.path.basename(filename).split('.')[0]
+
+        # create model and transcribe file with it
+        model = whisper.load_model('tiny')
+        trans_result = model.transcribe(f'input/{filename}', language=language)
+        transcription_txt = trans_result['text']
+
+        # save transcription
+        with open(f'output/{title}.txt', 'w') as f:
+            f.write(transcription_txt)
+
+
+if __name__=="__main__":
+    main()

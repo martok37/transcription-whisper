@@ -1,0 +1,7 @@
+# don't tranc files in input/output folders
+input/*
+output/*
+
+# but leave the folders themselves
+!input/.gitkeep
+!output/.gitkeep
