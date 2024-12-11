@@ -1,2 +1,2 @@
-whisper
+whisper-openai
 torch

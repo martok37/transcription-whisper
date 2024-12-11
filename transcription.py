@@ -1,7 +1,7 @@
 import whisper
 
 # Załaduj model (np. "small", "medium" lub "large")
-model = whisper.load_model("medium")
+model = whisper.load_model("tiny")
 
 # Opcjonalne: podaj ścieżkę do pliku audio
 audio_path = r"data/les_parisiennes.wav"
